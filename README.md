@@ -1,310 +1,130 @@
-# Calendar Application
+📅 Calendar Application
 
-A full-featured modern calendar application with daily, weekly, monthly, and yearly views. Built with React (frontend) and Node.js/Express (backend).
+A modern full-stack calendar application built with React (frontend) and Node.js / Express (backend). It allows users to manage events, set reminders, and organize schedules with a clean, responsive UI.
 
-## Features
+✨ Features
 
-### Core Features
-- ✅ Create, edit, and delete events
-- ✅ Event properties: Title, Description, Date, Start/End Time, Location, Category, Color
-- ✅ Recurring events (daily, weekly, monthly, yearly)
-- ✅ Reminders and notifications
-- ✅ Color-coded categories
-- ✅ Current day highlighting
-- ✅ Month/Year navigation
-- ✅ Search and filter by title, category, or date
+Create, edit, and delete events
 
-### Advanced Features
-- ✅ Time zone support
-- ✅ Calendar sync (iCal export)
-- ✅ Offline support with local storage
-- ✅ Dark mode and light mode
-- ✅ Responsive UI (desktop and mobile)
-- ✅ User authentication (login/register)
-- ✅ User-specific calendars
+Event details: title, description, date, time, location, category, color
 
-## Tech Stack
+Recurring events (daily, weekly, monthly, yearly)
 
-### Frontend
-- React 18
-- Vite
-- Tailwind CSS
-- React Router
-- Axios
-- date-fns
-- Lucide React (icons)
+Reminders and notifications
 
-### Backend
-- Node.js
-- Express.js
-- SQLite (database)
-- JWT (authentication)
-- bcryptjs (password hashing)
+Search and filter events
 
-## Project Structure
+Dark / Light mode
 
-```
+User authentication (login & register)
+
+User-specific calendars
+
+iCal export (Google Calendar, Outlook, etc.)
+
+Responsive design (desktop & mobile)
+
+🛠 Tech Stack
+Frontend
+
+React 18
+
+Vite
+
+Tailwind CSS
+
+React Router
+
+Axios
+
+date-fns
+
+Backend
+
+Node.js
+
+Express.js
+
+SQLite
+
+JWT Authentication
+
+bcryptjs
+
+📂 Project Structure
 Calendar/
-├── backend/
-│   ├── database/
-│   │   └── db.js              # Database initialization and queries
-│   ├── middleware/
-│   │   ├── auth.js            # JWT authentication middleware
-│   │   └── errorHandler.js    # Error handling middleware
-│   ├── models/
-│   │   ├── User.js            # User model
-│   │   └── Event.js           # Event model
-│   ├── routes/
-│   │   ├── auth.js            # Authentication routes
-│   │   └── events.js          # Event CRUD routes
-│   ├── utils/
-│   │   └── ical.js            # iCal export utility
-│   ├── server.js              # Express server entry point
-│   └── package.json
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── EventModal.jsx # Event create/edit modal
-│   │   │   └── EventList.jsx  # Event list component
-│   │   ├── context/
-│   │   │   ├── AuthContext.jsx # Authentication context
-│   │   │   └── ThemeContext.jsx # Theme context
-│   │   ├── pages/
-│   │   │   ├── Login.jsx      # Login page
-│   │   │   ├── Register.jsx   # Registration page
-│   │   │   └── Dashboard.jsx  # Main calendar dashboard
-│   │   ├── services/
-│   │   │   └── api.js         # Axios API client
-│   │   ├── utils/
-│   │   │   └── storage.js     # Local storage utility
-│   │   ├── App.jsx            # Main app component
-│   │   └── main.jsx           # React entry point
-│   ├── index.html
-│   └── package.json
-├── package.json               # Root package.json
+├── backend/    # Express API, SQLite DB, Auth, Events
+├── frontend/   # React UI
+├── package.json
 └── README.md
-```
 
-## Setup Instructions
+⚙️ Setup
+Requirements
 
-### Prerequisites
-- Node.js (v16 or higher)
-- npm or yarn
+Node.js (v16+)
 
-### Installation
+npm
 
-1. **Clone or navigate to the project directory**
-   ```bash
-   cd Calendar
-   ```
+Install dependencies
+npm run install-all
 
-2. **Install all dependencies** (root, backend, and frontend)
-   
-   **Option A: Install all at once (recommended)**
-   ```bash
-   npm run install-all
-   ```
-   
-   **Option B: Install manually**
-   ```bash
-   # Install root dependencies
-   npm install
-   
-   # Install backend dependencies
-   cd backend
-   npm install
-   
-   # Install frontend dependencies
-   cd ../frontend
-   npm install
-   ```
 
-3. **Configure environment variables**
-   
-   The backend uses a `.env` file (already created with defaults). For production, update `backend/.env`:
-   ```env
-   PORT=5000
-   JWT_SECRET=your-secret-key-change-this-in-production
-   NODE_ENV=development
-   ```
+Or manually:
 
-## Running the Application
+cd backend && npm install
+cd ../frontend && npm install
 
-### Development Mode (Recommended)
-
-Run both backend and frontend concurrently:
-
-```bash
-# From the root directory
+▶️ Run the App
+Development (recommended)
 npm run dev
-```
 
-This will start:
-- Backend server on `http://localhost:5000`
-- Frontend development server on `http://localhost:3000`
 
-### Run Separately
+Frontend: http://localhost:3000
 
-**Backend only:**
-```bash
-cd backend
-npm run dev
-```
+Backend: http://localhost:5000
 
-**Frontend only:**
-```bash
-cd frontend
-npm run dev
-```
+🔐 API Overview
 
-### Production Build
+Auth
 
-**Build frontend:**
-```bash
-cd frontend
-npm run build
-```
+POST /api/auth/register
 
-The built files will be in `frontend/dist/`.
+POST /api/auth/login
 
-## Usage
+Events
 
-1. **Open your browser** and navigate to `http://localhost:3000`
+GET /api/events
 
-2. **Register a new account** or **login** if you already have one
+POST /api/events
 
-3. **Create events:**
-   - Click "New Event" button
-   - Fill in event details (title, date, time, etc.)
-   - Select a category and color
-   - Optionally set recurring pattern and reminders
-   - Click "Create Event"
+PUT /api/events/:id
 
-4. **View events:**
-   - Events are displayed on the calendar grid
-   - Click on an event to edit it
-   - Use navigation buttons to move between months
+DELETE /api/events/:id
 
-5. **Search and filter:**
-   - Use the search bar to find events by title
-   - Use the category filter to filter by category
+GET /api/events/export/ical
 
-6. **Export calendar:**
-   - Click "Export" button to download events as iCal format
-   - Import the `.ics` file into Google Calendar, Outlook, etc.
+🗄 Database
 
-7. **Toggle dark mode:**
-   - Click the moon/sun icon in the header
+SQLite (calendar.db)
 
-## API Endpoints
+Auto-created on first run
 
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `GET /api/auth/me` - Get current user (requires auth)
+Tables: users, events
 
-### Events
-- `GET /api/events` - Get all events (with optional filters: startDate, endDate, category, search)
-- `GET /api/events/:id` - Get single event
-- `POST /api/events` - Create new event
-- `PUT /api/events/:id` - Update event
-- `DELETE /api/events/:id` - Delete event
-- `GET /api/events/export/ical` - Export events as iCal format
+🚀 Future Improvements
 
-## Database
+Daily / Weekly / Yearly views
 
-The application uses SQLite database. The database file (`calendar.db`) is automatically created on first run in the `backend/` directory.
+Drag & drop events
 
-### Schema
+Email notifications
 
-**Users table:**
-- id (TEXT, PRIMARY KEY)
-- username (TEXT, UNIQUE)
-- email (TEXT, UNIQUE)
-- password (TEXT, hashed)
-- created_at (DATETIME)
+Google Calendar sync
 
-**Events table:**
-- id (TEXT, PRIMARY KEY)
-- user_id (TEXT, FOREIGN KEY)
-- title (TEXT)
-- description (TEXT)
-- date (TEXT)
-- start_time (TEXT)
-- end_time (TEXT)
-- location (TEXT)
-- category (TEXT)
-- color (TEXT)
-- is_recurring (INTEGER)
-- recurrence_pattern (TEXT)
-- recurrence_end_date (TEXT)
-- reminder_minutes (INTEGER)
-- timezone (TEXT)
-- created_at (DATETIME)
-- updated_at (DATETIME)
+Event sharing
 
-## Key Components
+Mobile app (React Native)
 
-### Backend
-
-- **server.js**: Main Express server setup
-- **database/db.js**: SQLite database initialization and queries
-- **models/User.js**: User model with authentication methods
-- **models/Event.js**: Event model with CRUD operations
-- **routes/auth.js**: Authentication routes (register, login)
-- **routes/events.js**: Event CRUD routes
-- **middleware/auth.js**: JWT token verification middleware
-
-### Frontend
-
-- **App.jsx**: Main app component with routing
-- **pages/Dashboard.jsx**: Main calendar view with month grid
-- **components/EventModal.jsx**: Modal for creating/editing events
-- **context/AuthContext.jsx**: Authentication state management
-- **context/ThemeContext.jsx**: Dark/light theme management
-- **services/api.js**: Axios API client with authentication
-
-## Development Notes
-
-- The backend runs on port 5000 by default
-- The frontend runs on port 3000 by default and proxies API requests to the backend
-- JWT tokens expire after 7 days
-- Passwords are hashed using bcryptjs
-- The database is SQLite for simplicity (can be easily migrated to PostgreSQL/MySQL)
-
-## Troubleshooting
-
-**Port already in use:**
-- Change the port in `backend/.env` (PORT) or `frontend/vite.config.js` (server.port)
-
-**Database errors:**
-- Delete `backend/calendar.db` to reset the database
-- Ensure SQLite is properly installed
-
-**CORS errors:**
-- Check that the backend CORS is properly configured
-- Ensure frontend proxy settings in `vite.config.js` are correct
-
-**Authentication issues:**
-- Clear browser localStorage
-- Check that JWT_SECRET is set in backend/.env
-
-## Future Enhancements
-
-Potential features to add:
-- Drag-and-drop event rescheduling
-- Weekly and daily views (currently only monthly)
-- Yearly view
-- Email notifications
-- Google Calendar sync (import/export)
-- Event sharing between users
-- Calendar subscriptions
-- Mobile app (React Native)
-
-## License
+📜 License
 
 MIT
-#   C a l e n d a r  
- #   C a l e n d a r  
- #   C a l e n d a r  
- 
